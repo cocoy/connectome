@@ -1,0 +1,51 @@
+{
+  "builders": [{
+    "type": "amazon-ebs",
+    "region": "us-east-1",
+    "source_ami": "ami-7dd6a114",
+    "ami_virtualization_type": "hvm",
+    "instance_type": "g2.2xlarge",
+    "subnet_id": "subnet-ec3d22c4",
+    "vpc_id": "vpc-0a43ff6f",
+    "ssh_username": "centos",
+    "communicator": "ssh" ,
+    "ssh_pty" : true, 
+    "ami_name": "CentOS_6.7_STAR_Cluster-{{timestamp}}"
+  }],
+  "provisioners": [{
+    "type": "shell",
+    "inline": [
+      "sudo yum update -y",
+      "sudo yum install -y centos-release-SCL",
+      "sudo yum install -y python27 python27-scldevel",
+      "sudo yum install -y  nfs-utils nfs-utils-lib rpcbind libgssglue libtirpc epel-release",
+      "sudo yum install -y  python27-python-setuptools screen python-pip --enablerepo='epel'", 
+      "sudo yum groupinstall -y 'Development Tools'", 
+      "sudo wget -P /mnt http://developer.download.nvidia.com/compute/cuda/repos/rhel6/x86_64/cuda-repo-rhel6-6.5-14.x86_64.rpm", 
+      "sudo rpm --install /mnt/cuda-repo-rhel6-6.5-14.x86_64.rpm", 
+      "sudo yum clean expire-cache",
+      "sudo yum  --enablerepo=epel install cuda-6.5 -y",
+      "sudo wget -P /mnt ftp://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/5.3.0/freesurfer-Linux-centos6_x86_64-stable-pub-v5.3.0.tar.gz",
+      " sudo tar  -C /usr/local/ -zxvf /mnt/freesurfer-Linux-centos6_x86_64-stable-pub-v5.3.0.tar.gz", 
+      "cd /usr/local/freesurfer && sudo wget -O license.txt https://gist.githubusercontent.com/cocoy/abcf1d6fd993e751e245/raw/b2990113a2ae131696297a31c68e50a4ee444df6/gistfile1.txt", 
+      "sudo wget -P /opt -O fslinstaller.py http://bit.ly/1l72hIi",
+      "cd /opt/ && sudo chmod +x fslinstaller.py && sudo ./fslinstaller.py -d /usr/local/ -q", 
+      
+      "sudo yum install -y cmake libXp netpbm libcanberra-gtk2 graphviz mesa-libGLU gsl zlib-devel", 
+      "cd /opt/ && sudo git clone https://github.com/stnava/ANTs.git", 
+      "sudo mkdir /usr/local/ants", 
+      "cd /usr/local/ants/ && sudo cmake -c -g /opt/ANTs && sudo make -j 4",
+
+      "sudo wget -P /opt http://dl.dropbox.com/u/47200624/respin/ge2011.11.tar.gz ", 
+      "sudo tar -zxvf /opt/ge2011.11.tar.gz -C /opt/ ",
+      "sudo rm -f /opt/ge2011.11.tar.gz",
+      "sudo mv /opt/ge2011.11 /opt/sge6-fresh ", 
+      "sudo chkconfig nfs on",
+      "sudo service rpcbind start",
+      "sudo /etc/init.d/nfs start" ,
+      "sudo echo 'exit 0' | sudo tee -a /etc/init.d/portmap",
+      "sudo chmod +x  /etc/init.d/portmap ",
+      "exit 0 "
+    ]
+  }]
+}
