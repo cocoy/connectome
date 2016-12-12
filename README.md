@@ -8,7 +8,7 @@ Running and building Starcluster and creating AMI's using packer.
 
 ## Motivation
 
-TODO 
+todo 
 
 ## Installation
 
@@ -30,12 +30,11 @@ Configure starcluster by creating the config file at ~/.starcluster directory
 
 These plugins must be stored at ~/.starcluster/plugins
 
+## Using [Packer](https://www.packer.io/) to build AMI for starcluster.
 
-* Using [C-PAC] (https://github.com/FCP-INDI/C-PAC/tree/master/CPAC)
+todo
 
-The docmentation is [here] (http://fcp-indi.github.io/docs/user/cloud.html)
-  
-
+## 
 
 ## Tests
 
