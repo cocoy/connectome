@@ -12,19 +12,30 @@ TODO
 
 ## Installation
 
-Using the default install 
-http://star.mit.edu/cluster/docs/latest/quickstart.html 
+* Using [StarCluser] (http://star.mit.edu/cluster/docs/latest/quickstart.html)
 
-Or Using VirtualEnv and mkvirtualenv
+  Using VirtualEnv and mkvirtualenv for starcluster
 
+```
 $ mkvirtualenv connectome
 $ workon connectome 
 $ pip install StarCluster
+```
+
+Configure starcluster by creating the config file at ~/.starcluster directory 
 
 ## Plugin Reference
 
-StarCluster Plugins Added
-https://github.com/cocoy/StarClusterPlugins
+[StarCluster Plugins Added] (https://github.com/cocoy/StarClusterPlugins)
+
+These plugins must be stored at ~/.starcluster/plugins
+
+
+* Using [C-PAC] (https://github.com/FCP-INDI/C-PAC/tree/master/CPAC)
+
+The docmentation is [here] (http://fcp-indi.github.io/docs/user/cloud.html)
+  
+
 
 ## Tests
 
