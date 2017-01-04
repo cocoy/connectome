@@ -22,7 +22,12 @@ $ workon connectome
 $ pip install StarCluster
 ```
 
-Configure starcluster by creating the config file at ~/.starcluster directory 
+Configure starcluster by creating the config file at ~/.starcluster directory  OR
+copy the centos.config to $HOME/.starcluster/config. 
+Change the AWS keys and other parameters on the config file.
+
+More config samples will be available at sc_config folder. 
+
 
 ## Plugin Reference
 
